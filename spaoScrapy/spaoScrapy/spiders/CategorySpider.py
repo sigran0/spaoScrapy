@@ -20,4 +20,5 @@ class CategorySpider(scrapy.Spider):
 
             for lower_category in lower_categories:
                 lower_category_title = lower_category.xpath('@data-ga-tag').extract()[0][9:]
-                print upper_category_title, ' > ', lower_category_title
+                lower_category_no = lower_category.css('li > a').xpath('@onclick').re('[0-9]+')[0]
+                print upper_category_title, ' > ', lower_category_title, ' > ', lower_category_no
