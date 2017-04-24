@@ -9,4 +9,5 @@ class Category(Document):
     top_category = StringField(required=True)
     upper_category = StringField(required=True)
     lower_category = StringField(required=True)
+    lower_category_no = IntField(required=True)
     is_crawled = BooleanField(default=False)

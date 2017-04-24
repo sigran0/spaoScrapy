@@ -8,7 +8,8 @@
 import scrapy
 
 
-class SpaoscrapyItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class CategoryItem(scrapy.Item):
+    top_category = scrapy.Field()
+    upper_category = scrapy.Field()
+    lower_category = scrapy.Field()
+    lower_category_no = scrapy.Field()
