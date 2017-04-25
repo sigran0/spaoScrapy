@@ -15,4 +15,7 @@ class Page(Document):
 
     #   Page에서 받아올 수 있는것들
     goods_no = IntField(required=True)
+    goods_title = StringField(required=True)
+    goods_original_price = IntField(required=True)
+    goods_sale_price = IntField(required=True)
     is_crawled = BooleanField(default=False)

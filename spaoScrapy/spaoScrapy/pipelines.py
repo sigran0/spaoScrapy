@@ -73,7 +73,10 @@ class SpaoscrapyPipeline(object):
     def store_page(cls, item):
         page = Page(
             category=item['category'],
-            goods_no=item['goods_no']
+            goods_no=item['goods_no'],
+            goods_title=item['goods_title'],
+            goods_original_price=item['goods_original_price'],
+            goods_sale_price=item['goods_sale_price']
         )
 
         try:

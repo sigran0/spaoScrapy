@@ -19,6 +19,9 @@ class PageItem(scrapy.Item):
     category = scrapy.Field()
 
     goods_no = scrapy.Field()
+    goods_title = scrapy.Field()
+    goods_original_price = scrapy.Field()
+    goods_sale_price = scrapy.Field()
 
 
 class GoodsItem(scrapy.Item):
