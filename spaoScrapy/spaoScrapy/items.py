@@ -13,3 +13,9 @@ class CategoryItem(scrapy.Item):
     upper_category = scrapy.Field()
     lower_category = scrapy.Field()
     lower_category_no = scrapy.Field()
+
+
+class PageItem(scrapy.Item):
+    page_number = scrapy.Field()
+    now_number = scrapy.Field()
+    goods_no = scrapy.Field()

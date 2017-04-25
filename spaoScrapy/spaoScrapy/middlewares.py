@@ -53,4 +53,5 @@ class SpaoscrapySpiderMiddleware(object):
             yield r
 
     def spider_opened(self, spider):
-        spider.logger.info('Spider opened: %s' % spider.name)
+        #spider.logger.info('Spider opened: %s' % spider.name)
+        pass
