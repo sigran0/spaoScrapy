@@ -136,7 +136,8 @@ class SpaoscrapyPipeline(object):
             discount_price=item['discount_price'],
             product_thumbnail_images=item['product_thumbnail_images'],
             product_url=item['product_url'],
-            product_fabric=item['product_fabric']
+            product_fabric=item['product_fabric'],
+            product_gender=item['product_gender']
         )
 
         try:

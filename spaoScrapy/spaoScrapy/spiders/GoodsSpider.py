@@ -18,6 +18,8 @@ class GoodsSpider(scrapy.Spider):
         bs_object를 만드는것 까진 되나, find 과정에서 None Object를 return한다.
         
         왜지?!
+
+        첫 시작 url을 아직 찾지 않은곳에서 받아오기는 안돌까까
     """
     start_urls = [
         'http://spao.elandmall.com/goods/initGoodsDetail.action?goods_no=1701118952'
@@ -49,6 +51,15 @@ class GoodsSpider(scrapy.Spider):
             product_color = None
             product_thumbnail_images = []
             product_url = res.url
+            product_gender = 'BOTH' if page['category'][0] == 'ACC' else page['category'][0]
+
+            """
+                product_gender의 경우 사이트 크롤링을 통해서 알아낼 방법을 찾지 못하였다
+                추후에 발견되면 수정을하고, 일단 Top Category에서 Man, Woman, Acc 를 이용하여 판별하자
+                MEN : 남성
+                WOMEN : 여성
+                Acc : Both
+            """
 
             bs_object = BeautifulSoup(res.body)
 
@@ -88,6 +99,7 @@ class GoodsSpider(scrapy.Spider):
             item['product_thumbnail_images'] = product_thumbnail_images
             item['product_url'] = product_url
             item['product_fabric'] = product_fabric
+            item['product_gender'] = product_gender
 
             """
                 저장
