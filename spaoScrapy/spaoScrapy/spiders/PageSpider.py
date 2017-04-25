@@ -26,33 +26,28 @@ class PageSpider(scrapy.Spider):
 
     def parse(self, res):
 
-        self.driver.get(res.url)
-
+        self.driver.get('http://spao.elandmall.com/dispctg/initDispCtg.action?page_idx=mall_no=0000037&sort=2&category_1depth=&color_info=&category_2depth=1607300159&deliCostFreeYn=&applyEndDate=&vend_no=&dispStartDate=&newGoodsStartDate=&min_price=&category_4depth=&srchFd=null&category_3depth=&setDicountYn=&applyStartDate=&_=1493112823844&brand_no=&category_5depth=null&category_6depth=null&kwd=&listType=image&giftYn=&pageSize=999&newGoodsEndDate=&reSrch=&disp_ctg_no=1607300159&size_info=&oneMoreYn=&dispEndDate=&listOnly=Y&discountYn=&max_price=&material_info=')
+"""
         numbers = self.driver.find_elements_by_css_selector('div#page_idx > span.num > a')
+        number_names = []
+        number_params = []
 
         for number in numbers:
-            self.driver.implicitly_wait(3)
-            print number.text
-            number.click()
+            number_names.append(number.text)
+            number_params.append(number.get_attribute('parameters'))
 
-            print 'clicked'
+        print number_params
+"""
+        page_source = self.driver.page_source
+        bs_object = BeautifulSoup(page_source)
 
-            try:
-                self.driver.implicitly_wait(3)
-            except TimeoutException as ex:
-                print('Exception has been thrown. ' + str(ex))
-                self.driver.close()
-            finally:
-                page_source = self.driver.page_source
-                bs_object = BeautifulSoup(page_source)
+        lists = bs_object.find(id='goodsList').findAll('ul', {'class': 'list'})
 
-                lists = bs_object.find(id='goodsList').findAll('ul', {'class': 'list'})
+        for list in lists:
 
-                for list in lists:
+            products = list.findAll('li')
 
-                    products = list.findAll('li')
+            for product in products:
 
-                    for product in products:
-
-                        name = product.find('span', {'class': 'prod_nm'})
-                        print name.text
+                name = product.find('span', {'class': 'prod_nm'})
+                print name.text
