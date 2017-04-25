@@ -34,7 +34,7 @@ class CategorySpider(scrapy.Spider):
                 item['lower_category_no'] = lower_category_no
 
                 pipeline = SpaoscrapyPipeline()
-                result = pipeline.store_categories(item, self)
+                result = pipeline.store_categories(item)
                 
                 if result is not True:  #   저장시 문제가 생긴경우
                     print 'Store Error!'
