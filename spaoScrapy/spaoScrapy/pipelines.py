@@ -8,6 +8,7 @@
 from mongoengine import connect
 from models.Category import Category
 from models.Page import Page
+from models.Product import Product
 from mongoengine.errors import DoesNotExist
 
 class SpaoscrapyPipeline(object):
@@ -23,9 +24,23 @@ class SpaoscrapyPipeline(object):
         except DoesNotExist as e:
             print 'Does Not Exist'
             return None
-        finally:
+        else:
             if len(category) > 0:
                 return category[0]
+            else:
+                return None
+
+    @classmethod
+    def get_uncrawled_page(cls):
+        page = None
+        try:
+            page = Page.objects(is_crawled=False)
+        except DoesNotExist as e:
+            print 'Does Not Exist'
+            return None
+        else:
+            if len(page) > 0:
+                return page[0]
             else:
                 return None
 
@@ -37,9 +52,23 @@ class SpaoscrapyPipeline(object):
         except DoesNotExist as e:
             print 'Does Not Exist'
             return None
-        finally:
+        else:
             if len(category) > 0:
                 return category[0]
+            else:
+                return None
+
+    @classmethod
+    def get_page_by_no(cls, no):
+        page = None
+        try:
+            page = Page.objects(goods_no=int(no))
+        except DoesNotExist as e:
+            print 'Does Not Exist'
+            return None
+        else:
+            if len(page) > 0:
+                return page[0]
             else:
                 return None
 
@@ -50,7 +79,17 @@ class SpaoscrapyPipeline(object):
         except DoesNotExist as e:
             print 'Does Not Exist'
             return False
-        finally:
+        else:
+            return True
+
+    @classmethod
+    def set_crawled_page(cls, goods_no):
+        try:
+            Page.objects(goods_no=goods_no).update(set__is_crawled=True)
+        except DoesNotExist as e:
+            print 'Does Not Exist'
+            return False
+        else:
             return True
 
     @classmethod
@@ -81,6 +120,27 @@ class SpaoscrapyPipeline(object):
 
         try:
             page.save()
+        except Exception as e:
+            print e
+            return False
+        return True
+
+    @classmethod
+    def store_product(cls, item):
+        product = Product(
+            product_code=item['product_code'],
+            product_name=item['product_name'],
+            product_category=item['product_category'],
+            product_color=item['product_color'],
+            original_price=item['original_price'],
+            discount_price=item['discount_price'],
+            product_thumbnail_images=item['product_thumbnail_images'],
+            product_url=item['product_url'],
+            product_fabric=item['product_fabric']
+        )
+
+        try:
+            product.save()
         except Exception as e:
             print e
             return False

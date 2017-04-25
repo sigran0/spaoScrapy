@@ -5,6 +5,7 @@ from mongoengine import StringField
 from mongoengine import IntField
 from mongoengine import ListField
 from mongoengine import DateTimeField
+from mongoengine import BooleanField
 
 import datetime
 
@@ -20,11 +21,11 @@ class Product(Document):
     product_code = IntField()               #   O
     product_name = StringField()            #   O
     product_category = ListField()          #   O
-    product_color = ListField()             #   X
+    product_color = ListField()             #   O
     original_price = IntField()             #   O
     discount_price = IntField()             #   O
-    product_thumbnail_images = ListField()  #   X
-    product_url = StringField()             #   Can Make
-    product_fabric = StringField()          #   X
+    product_thumbnail_images = ListField()  #   O
+    product_url = StringField()             #   O
+    product_fabric = StringField()          #   O
     product_gender = StringField()          #   X
     created_at = DateTimeField(default=datetime.datetime.now)
