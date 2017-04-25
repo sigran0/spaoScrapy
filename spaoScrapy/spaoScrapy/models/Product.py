@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 
 from mongoengine import Document
 from mongoengine import StringField
@@ -7,15 +8,23 @@ from mongoengine import DateTimeField
 
 import datetime
 
+"""
+    구현 해야할것
+    product_color
+    product_thumbnail_images
+    product_fabric
+    product_gender
+"""
+
 class Product(Document):
-    product_code = IntField()
-    product_name = StringField()
-    product_category = ListField()
-    product_color = ListField()
-    original_price = IntField()
-    discount_price = IntField()
-    product_thumbnail_images = ListField()
-    product_url = StringField()
-    product_fabric = StringField()
-    product_gender = StringField()
+    product_code = IntField()               #   O
+    product_name = StringField()            #   O
+    product_category = ListField()          #   O
+    product_color = ListField()             #   X
+    original_price = IntField()             #   O
+    discount_price = IntField()             #   O
+    product_thumbnail_images = ListField()  #   X
+    product_url = StringField()             #   Can Make
+    product_fabric = StringField()          #   X
+    product_gender = StringField()          #   X
     created_at = DateTimeField(default=datetime.datetime.now)
