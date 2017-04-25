@@ -5,7 +5,6 @@ from mongoengine import StringField
 from mongoengine import IntField
 from mongoengine import ListField
 from mongoengine import DateTimeField
-from mongoengine import BooleanField
 
 import datetime
 

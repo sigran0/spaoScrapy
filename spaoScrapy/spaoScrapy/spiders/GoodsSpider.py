@@ -6,6 +6,7 @@ from ..items import GoodsItem
 from ..pipelines import SpaoscrapyPipeline
 from BeautifulSoup import BeautifulSoup
 
+
 class GoodsSpider(scrapy.Spider):
 
     name = 'goods'

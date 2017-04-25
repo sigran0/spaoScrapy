@@ -6,6 +6,7 @@ from ..items import PageItem
 from ..pipelines import SpaoscrapyPipeline
 from BeautifulSoup import BeautifulSoup
 
+
 class PageSpider(scrapy.Spider):
 
     name = 'page'
