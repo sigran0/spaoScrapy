@@ -7,6 +7,7 @@
 
 from mongoengine import connect
 from models.Category import Category
+from models.Page import Page
 from mongoengine.errors import DoesNotExist
 
 class SpaoscrapyPipeline(object):
@@ -49,6 +50,19 @@ class SpaoscrapyPipeline(object):
 
         try:
             category.save()
+        except Exception as e:
+            print e
+            return False
+        return True
+
+    @classmethod
+    def store_page(cls, goods_no):
+        page = Page(
+            goods_no=int(goods_no)
+        )
+
+        try:
+            page.save()
         except Exception as e:
             print e
             return False

@@ -5,5 +5,7 @@ from mongoengine import BooleanField
 from mongoengine import IntField
 from mongoengine import ObjectIdField
 
+
 class Page(Document):
-    pass
+    goods_no = IntField(required=True)
+    is_crawled = BooleanField(default=False)

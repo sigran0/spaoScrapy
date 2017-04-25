@@ -17,6 +17,8 @@ class PageSpider(scrapy.Spider):
 
     def parse(self, res):
 
+        pipeline = SpaoscrapyPipeline()
+
         #   Category Number를 regex로 찾아오기
         category_num = re.findall(r'[0-9]{6,15}', res.url)[0]
 
@@ -34,10 +36,11 @@ class PageSpider(scrapy.Spider):
 
                 for product in products:
 
-                    name = product.find('span', {'class': 'prod_nm'})
-                    print name.text
+                    onclick = product.find('a', recursive=False)['onclick']
+                    goods_no = re.findall(r'goods_no:\'[0-9]+', onclick)[0][10:]
 
-        pipeline = SpaoscrapyPipeline()
+                    pipeline.store_page(goods_no)
+
         pipeline.set_crawled_category(category_num)
         next_category = pipeline.get_uncrawled_category()
 
