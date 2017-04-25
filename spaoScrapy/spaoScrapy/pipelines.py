@@ -30,6 +30,20 @@ class SpaoscrapyPipeline(object):
                 return None
 
     @classmethod
+    def get_category_by_no(cls, no):
+        category = None
+        try:
+            category = Category.objects(lower_category_no=int(no))
+        except DoesNotExist as e:
+            print 'Does Not Exist'
+            return None
+        finally:
+            if len(category) > 0:
+                return category[0]
+            else:
+                return None
+
+    @classmethod
     def set_crawled_category(cls, category_no):
         try:
             Category.objects(lower_category_no=category_no).update(set__is_crawled=True)
@@ -56,9 +70,10 @@ class SpaoscrapyPipeline(object):
         return True
 
     @classmethod
-    def store_page(cls, goods_no):
+    def store_page(cls, item):
         page = Page(
-            goods_no=int(goods_no)
+            category=item['category'],
+            goods_no=item['goods_no']
         )
 
         try:

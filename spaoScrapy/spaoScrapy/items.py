@@ -16,8 +16,8 @@ class CategoryItem(scrapy.Item):
 
 
 class PageItem(scrapy.Item):
-    page_number = scrapy.Field()
-    now_number = scrapy.Field()
+    category = scrapy.Field()
+
     goods_no = scrapy.Field()
 
 
